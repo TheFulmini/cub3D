@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 18:17:23 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:30:57 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,20 @@ void	error_exit(char *error_msg, t_data *d, t_parse *pars, char **map);
 void	check_map(t_data *d, t_parse *pars);
 void	parsing(int argc, char **argv, t_parse *pars);
 
+// parsing_utils.c
+void	init_values(t_data *d, t_parse *pars);
+void	init_elems(t_elems *elems);
+char	*get_identifier(t_data *d);
+void	get_fd(char *map_arg, char *et, t_data *d);
+int		count_arg(char *line);
 
+//parsing_utils2.c
+
+//parsing_basic.c
+int		is_space(char c);
+int		is_digit(char c);
+int		is_upper(char c);
+int		ft_strncmp(char *s1, char *s2);
+int		ft_atoi(const char *str);
 
 #endif

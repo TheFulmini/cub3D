@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:59:07 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 17:46:15 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:11:03 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_map(t_data *d, t_parse *pars)
 {
 	d->line = NULL;
 	d->id = NULL;
-	while (is_emptry_line(d->line) && d->ret > 0) //define function
+	while (is_empty_line(d->line) && d->ret > 0) //define function
 	{
 		free(d->line);
 		d->ret = get_next_line(d->fd, &d->line);
