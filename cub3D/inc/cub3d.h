@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 19:30:57 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:25:55 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,36 @@ typedef struct	s_elems
 	int	floor_col;
 }				t_elems;
 
+typedef struct	s_raycast
+{
+	double	raydirection_x;
+	double	raydirection_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpWallDist;
+	double	wallX;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;	// 1 if y touched, 0 if x touched
+	int		line_heigth;
+	int		draw_start;
+	int		draw_end;
+	int		text_num;
+	int		text_x;
+	int		text_y;
+	int		colour;
+	double	text_pos;
+	double	step;
+	double	old_dir_x;
+	double	old_plane_x;
+	double	move_speed;
+	double	turn_speed;
+}				t_raycast;
+
 typedef	struct	s_parse
 {
 	int			screen_width;
@@ -90,7 +120,7 @@ typedef	struct	s_parse
 	double		plane_y;
 	char		**map;
 	int			nb_sprites;
-	int			save_arg;
+	int			save;
 	t_sprites	*sprite_tab;
 }				t_parse;
 
@@ -104,7 +134,7 @@ typedef	struct	s_mlx
 	int		move_right;
 	int		look_left;
 	int		look_right;
-	int		tex_width[5];
+	int		text_width[5];
 	int		text_height[5];
 	t_img	img;
 	t_img	img1;
@@ -148,6 +178,11 @@ void	get_fd(char *map_arg, char *et, t_data *d);
 int		count_arg(char *line);
 
 //parsing_utils2.c
+int		is_empty_line(char *line);
+void	check_color_format(t_data *d, t_parse *pars);
+void	set_boll_elems(t_data *d, t_elems *elems, t_parse *pars);
+int		all_elems_found(t_elems elems);
+void	get_res(t_data *d, t_parse *pars, t_elems *elems);
 
 //parsing_basic.c
 int		is_space(char c);
@@ -155,5 +190,12 @@ int		is_digit(char c);
 int		is_upper(char c);
 int		ft_strncmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
+
+//hooks.c
+int		key_press(int keycode, t_mlx *d);
+int		key_release(int keycode, t_mlx *d);
+int		click_exit(t_mlx *d);
+
+//raycasting.c
 
 #endif

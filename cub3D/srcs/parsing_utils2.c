@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:00:34 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 19:30:52 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/23 09:03:27 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	get_res(t_data *d, t_parse *pars, t_elems *elems)
 
 	i = 0;
 	if (count_arg(d->line) != 2)
-		error_exit("Invalid number of arguments for Resolution.". d, pars, 0);
+		error_exit("Invalid number of arguments for Resolution.", d, pars, 0);
 	while (is_space(d->line[i]) && d->line[i])
 		i++;
 	while (is_upper(d->line[i]) && d->line[i])
