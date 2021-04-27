@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:44:38 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/23 15:52:35 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/26 11:25:15 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	get_sprite(t_mlx *d, t_raycast *r, t_spritevar *s)
 
 	set_distance(d, s); //define function
 	i = 0;
-	while (i < d.p.nb_sprites)
+	while (i < d.p.nb_sprites) // check this struct call 
 	{
-		s->sprite_y = d.p.sprite_tab[s->sprite_order[i]].y - d.p.pos_y;
-		s->sprite_x = d.p.sprite_tab[s->sprite_order[i]].x - d.p.pos_x;
+		s->sprite_y = d.p.sprite_tab[s->sprite_order[i]].y - d.p.pos_y; // check this struct call
+		s->sprite_x = d.p.sprite_tab[s->sprite_order[i]].x - d.p.pos_x; // check this struct call
 		set_sprite(d, s); //define this function
 		draw_sprites(d, r, s); // define this function
 		i++;
@@ -87,18 +87,18 @@ void	free_sprites_tab(t_spritevar *s)
 int	raycasting(t_mlx *d)
 {
 	t_spritevar	spr_v;
-	int			i;
+	int			x;
 	t_raycast	r; //define struct
 
 	if (init_sprite_tabs(&spr_v, *d) == 0)
 		clean_exit("Memory Error. Not able to allocate sufficient memory", 0, 0, &spr_v);
-	i = 0;
-	while (i < d->p.screen_width)
+	x = 0;
+	while (x < d->p.screen_width)
 	{
-		set_raycast_vars(d, &r, i);	//deifne function
+		set_raycast_vars(d, &r, x);	//deifne function
 		set_textures_vars(d, &r);
-		draw_line(d, &r, i);
-		spr_v.zbuffer[i++] = r.perpWallDist;
+		draw_line(d, &r, x);
+		spr_v.zbuffer[x++] = r.perpWallDist;
 	}
 	if (d->p.nb_sprites > 0)
 		get_sprites(*d, r, &spr_v);	//define function

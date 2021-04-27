@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:59:07 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 19:11:03 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/26 16:47:15 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	parsing(int argc, char **argv, t_parse *pars)
 		if (ft_strcmp(argv[2], "--save"))
 			error_exit("Invalid 3rd argument.", 0, 0, 0);
 		else
-			pars->save_arg = 1;
+			pars->save = 1;
 	}
 	get_fd(argv[1], ".cub", &d); // define function
 	parse_elems(&d, pars); // define function

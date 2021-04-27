@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/23 15:25:55 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 11:49:22 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,10 @@ void	get_fd(char *map_arg, char *et, t_data *d);
 int		count_arg(char *line);
 
 //parsing_utils2.c
-int		is_empty_line(char *line);
+int		is_empty(char *line);
 void	check_color_format(t_data *d, t_parse *pars);
-void	set_boll_elems(t_data *d, t_elems *elems, t_parse *pars);
-int		all_elems_found(t_elems elems);
+void	set_bool_elem(t_data *d, t_elems *elems, t_parse *pars);
+int		all_elements_found(t_elems elems);
 void	get_res(t_data *d, t_parse *pars, t_elems *elems);
 
 //parsing_basic.c
@@ -191,11 +191,59 @@ int		is_upper(char c);
 int		ft_strncmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
 
+//map_parsing.c
+char	**copy_map(t_data *d, t_parse *p, char **map, int nb_lines);
+void	map_parsing(t_data *d, t_parse *p);
+void	add_sprite_pos(t_parse *p, int i, int j);
+void	check_map_char(t_data *d, t_parse *p, int i, int j);
+void	check_map(t_data *d, t_parse *p);
+
+//elements_parsing.c
+void	get_path_bis(t_data *d, t_parse *p, char **path);
+void	get_path(t_data *d, t_parse *p, t_elems *e);
+void	get_colour(t_data *d, t_parse *p, t_elems *e);
+void	get_element(t_data *d, t_parse *p, t_elems *e);
+void	parse_elemtns(t_data *d, t_parse *p);
+
+//mlx_utils.c
+void	mlx_destroy(t_mlx *d);
+void	get_pixel(t_img *img, int x, int y, int colour);
+void	put_pixel(t_img *img, int x, int y, int *colour);
+void	init_mlx_var(t_mlx *d);
+
 //hooks.c
 int		key_press(int keycode, t_mlx *d);
 int		key_release(int keycode, t_mlx *d);
 int		click_exit(t_mlx *d);
 
 //raycasting.c
+void	set_textures_var(t_mlx *d, t_raycast *r);
+void	draw_line(t_data *d, t_raycast *r, int x);
+void	get_sprite(t_mlx *d, t_raycast *r, t_spritevar *s);
+void	free_sprite_tab(t_spritevar *s);
+int		raycasting(t_mlx *d);
+
+//vectors.c
+void	dda_algorithm(t_raycast *r, t_mlx *d);
+void	set_ray_direction_length(t_raycast *r, t_mlx *d);
+void	set_raycast_var(t_mlx *d, t_raycast *r, int x);
+
+//sprites.c
+void	sort_sprites(t_spritevar *sprite, int amount);
+int		init_sprite_tab(t_spritevar *spr, t_mlx d);
+void	set_distance(t_mlx d, t_spritevar *spr);
+void	set_sprite(t_mlx d, t_spritevar *spr);
+void	draw_sprite(t_mlx d, t_raycast r, t_spritevar *spr);
+
+//save_bmp.c
+void	create_header(t_mlx d, int fd);
+void	save_bmp(t_mlx d);
+
+//main.c
+int		clean_exit(char *exit_msg, t_parse *p, t_mlx *d, t_spritevar *s);
+void	get_vectors_start(t_parse *p);
+void	init_moves(t_mlx *d);
+void	init_textures(t_mlx *d);
+int		main(int argc, char **argv);
 
 #endif

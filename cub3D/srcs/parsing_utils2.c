@@ -6,13 +6,13 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:00:34 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/23 09:03:27 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/26 17:43:49 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	is_empty_line(char *line)
+int	is_empty(char *line)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ void	set_bool_elem(t_data *d, t_elems *elems, t_parse *pars)
 		error_exit("Invalid identifier", d, pars, 0);
 }
 
-int		all_elems_found(t_elems elems)
+int		all_elements_found(t_elems elems)
 {
 		if (elems.res == 0)
 		return (0);

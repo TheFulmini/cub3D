@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:37 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 18:28:31 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/26 17:50:24 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_values(t_data *d, t_parse *pars)
 	d->ret = 1;
 	pars->sprite_tab = NULL;
 	pars->nb_sprites = 0;
-	pars->save_arg = 0;
+	pars->save = 0;
 }
 
 void	init_elems(t_elems *elems)
@@ -43,7 +43,7 @@ void	init_elems(t_elems *elems)
 char	*get_identifier(t_data *d)
 {
 	int	i;
-	int	k;
+	int	j;
 
 	i = 0;
 	while (is_space(d->line[i]) && d->line[i])
@@ -72,7 +72,7 @@ void	get_fd(char *map_arg, char *ext, t_data *d)
 	i = 0;
 	while (map_arg[i])
 		i++;
-	if (ft_strcmp(map_arg + i - 4, ext); // define function
+	if (ft_strcmp(map_arg + i - 4, ext))
 		error_exit("Map file must be \".cub\" format.", 0, 0, 0);
 	d->fd = open(map_arg, O_RDONLY);
 	if (d->fd == -1)
