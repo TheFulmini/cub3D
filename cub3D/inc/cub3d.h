@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 11:49:22 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:52:14 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ typedef	struct	s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		move_up;
-	int		move_down;
+	int		move_forward;
+	int		move_backward;
 	int		move_left;
 	int		move_right;
 	int		look_left;
@@ -199,7 +199,7 @@ void	check_map_char(t_data *d, t_parse *p, int i, int j);
 void	check_map(t_data *d, t_parse *p);
 
 //elements_parsing.c
-void	get_path_bis(t_data *d, t_parse *p, char **path);
+void	get_path_bis(t_data *d, t_parse *p, char *path);
 void	get_path(t_data *d, t_parse *p, t_elems *e);
 void	get_colour(t_data *d, t_parse *p, t_elems *e);
 void	get_element(t_data *d, t_parse *p, t_elems *e);

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 09:05:29 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 11:49:33 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:47:41 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	get_vectors_start(t_parse *p)
 		p->dir_y = 1;
 		p->plane_x = -0.66;
 	}
-	if (p->dir == 'N')
+	if (p->dir == 'W')
 	{
 		p->dir_y = -1;
 		p->plane_x = 0.66;
 	}
-	if (p->dir == 'N')
+	if (p->dir == 'E')
 	{
 		p->dir_y = -1;
 		p->plane_x = 0.66;
@@ -62,8 +62,8 @@ void	get_vectors_start(t_parse *p)
 
 void	init_moves(t_mlx *d)
 {
-	d->move_up = 0;
-	d->move_down = 0;
+	d->move_forward= 0;
+	d->move_backward = 0;
 	d->move_left = 0;
 	d->move_right = 0;
 	d->look_left = 0;

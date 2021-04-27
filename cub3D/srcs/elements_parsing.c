@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:47:52 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 18:24:54 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:52:04 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	get_element(t_data *d, t_parse *p, t_elems *e)
 	else if (ft_strncmp(d->id, "C") == 0)
 		get_path(d, p, e);
 	else
-		error_exit("Invalid indentifier", d, p, 0)
+		error_exit("Invalid indentifier", d, p, 0);
 }
 
 void	parse_elements(t_data *d, t_parse *p)
