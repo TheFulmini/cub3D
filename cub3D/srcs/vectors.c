@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:56:22 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 23:11:20 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:20:50 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	dda_algorithm(t_raycast *r, t_mlx *d)
 			r->side = 1;
 		}
 		if (d->p.map[r->map_x][r->map_y] == '1')
-			break;
+			break ;
 	}
 	if (r->side == 0)
 		r->perpWallDist = (r->map_x - d->p.pos_x
@@ -50,7 +50,6 @@ void	set_ray_direction_length(t_raycast *r, t_mlx *d)
 	{
 		r->step_y = 1;
 		r->side_dist_y = (r->map_x + 1.0 - d->p.pos_x) * r->deltadist_y;
-
 	}
 	if (r->raydirection_x < 0)
 	{

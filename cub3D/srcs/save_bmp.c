@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:17:12 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 11:49:31 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:31:23 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	save_bmp(t_mlx d)
 
 	y = d.p.screen_heigth;
 	fd = open("./saved_image.bmp", O_CREAT | O_RDWR);
-	if (fd = -1)
+	if (fd == -1)
 		clean_exit("Impossible to save the bmp file.", &d.p, &d, 0);
 	create_header(d, fd);
 	while (y >= 0)
@@ -52,7 +52,7 @@ void	save_bmp(t_mlx d)
 		while (x < d.p.screen_width)
 		{
 			get_pixel(&d.img, x + 2, y, &colour);
-			write(fd, &colour, 4);		
+			write(fd, &colour, 4);
 			x++;
 		}
 		y--;

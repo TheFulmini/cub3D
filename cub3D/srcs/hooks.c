@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:47:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 12:13:40 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:39:51 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_press(int keycode, t_mlx *d)
 	if (keycode == 13)
 		d->move_forward = 1;
 	if (keycode == 1)
-		d->move_backward =1;
+		d->move_backward = 1;
 	if (keycode == 0)
 		d->move_left = 1;
 	if (keycode == 2)
@@ -36,7 +36,7 @@ int	key_release(int keycode, t_mlx *e)
 	if (keycode == 13)
 		e->move_forward = 0;
 	if (keycode == 1)
-		e->move_backward =0;
+		e->move_backward = 0;
 	if (keycode == 0)
 		e->move_left = 0;
 	if (keycode == 2)
@@ -48,7 +48,7 @@ int	key_release(int keycode, t_mlx *e)
 	return (0);
 }
 
-int click_exit(t_mlx *d)
+int	click_exit(t_mlx *d)
 {
 	clean_exit("Game left", &d->p, d, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:36:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 18:19:05 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:03:38 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**copy_map(t_data *d, t_parse *p, char **map, int nb_lines)
 	int		j;
 
 	if (!(new_map = malloc(sizeof(char *) * nb_lines)))
-		error_exit("Error. Not enough memory to allocate.",d, p, 0);
+		error_exit("Error. Not enough memory to allocate.", d, p, 0);
 	i = 0;
 	while (i < nb_lines - 2)
 	{
@@ -53,7 +53,7 @@ void	map_parsing(t_data *d, t_parse *p)
 		if (i != 0)
 			d->ret = get_next_line(d->fd, &d->line);
 		p->map = copy_map(d, p, p->map, i + 2);
-		if(!(p->map[i] = malloc(sizeof(char) * (ft_strlen(d->line) + 1))))
+		if (!(p->map[i] = malloc(sizeof(char) * (ft_strlen(d->line) + 1))))
 			error_exit("Error, Not enough free mmory to allocate.", d, p, 0);
 		j = -1;
 		while (d->line[++j])
@@ -74,7 +74,7 @@ void	add_sprite_pos(t_parse *p, int i, int j)
 
 	new_sprite = malloc(sizeof(t_sprites) * (n + 1));
 	k = 0;
-	while ( k < n)
+	while (k < n)
 	{
 		new_sprite[k].x = p->sprite_tab[k].x;
 		new_sprite[k].y = p->sprite_tab[k].y;
@@ -91,27 +91,27 @@ void	add_sprite_pos(t_parse *p, int i, int j)
 
 void	check_map_char(t_data *d, t_parse *p, int i, int j)
 {
-	if (p->map[i] == 'N'|| p->map[i] == 'S' || p->map[i] == 'E'
-		|| p->map[i] = 'W')
+	if (p->map[i][j] == 'N' || p->map[i][j] == 'S' || p->map[i][j] == 'E'
+		|| p->map[i][j] == 'W')
 	{
 		p->dir = p->map[i][j];
-		p->pos_x = i +0.5;
+		p->pos_x = i + 0.5;
 		p->pos_y = j + 0.5;
 	}
 	if (p->map[i][j] == '2')
 		add_sprite_pos(p, i, j);
-	if (!is_space(p->map[i][j] && p->map[i][j] != 'E' && p->map[i][j] != 'W'
+	if (!is_space(p->map[i][j]) && p->map[i][j] != 'E' && p->map[i][j] != 'W'
 		&& p->map[i][j] != 'N' && p->map[i][j] != 'S' && !(p->map[i][j] >= '0'
-		&& p->map[i][j] <= '2')))
+		&& p->map[i][j] <= '2'))
 		error_exit("Wrong character in map.", d, p, 0);
 	if (p->map[i][j] == '0' || p->map[i][j] == '2' || p->map[i][j] == 'N'
-		|| (p->map[i][j] == 'S' || p->map[i][j] == 'E' || p->map[i][j] == 'W')
+		|| (p->map[i][j] == 'S' || p->map[i][j] == 'E' || p->map[i][j] == 'W'))
 	{
 		if (j == 0 || j == (int)ft_strlen(p->map[i]) - 1 || i == 0
 			|| p->map[i + 1] == 0 || j >= (int)ft_strlen(p->map[i + 1]))
-			error_exit("Invalid map."d, p , 0);
+			error_exit("Invalid map.", d, p, 0);
 		if (is_space(p->map[i + 1][j]) || is_space(p->map[i - 1][j])
-			|| is_space(p->map[i][j + 1]) || is_space(p->map[i][j -1]))
+			|| is_space(p->map[i][j + 1]) || is_space(p->map[i][j - 1]))
 			error_exit("Invalid map.", d, p, 0);
 	}
 }

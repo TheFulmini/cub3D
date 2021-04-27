@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 09:33:49 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 11:39:47 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:00:53 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	sort_sprites(t_spritevar *sprite, int amount)
 {
 	int		i;
 	int		j;
-	double	db_temp; // check this variable name origin
+	double	db_temp;
 	int		i_temp;
 
 	i = 0;
 	while (i < amount)
 	{
-		j = i + 1								;
+		j = i + 1;
 		while (j < amount)
 		{
 			if (sprite->sprite_distance[j] > sprite->sprite_distance[i])
@@ -83,6 +83,7 @@ void	set_sprite(t_mlx d, t_spritevar *spr)
 			* spr->sprite_y + d.p.plane_x * spr->sprite_x);
 	spr->sprite_height = abs((int)(d.p.screen_width / 2)
 			* (1 + spr->transform_x / spr->transform_y));
+	spr->sprite_height = abs((int)(d.p.screen_height / (s->transform_y)));
 	spr->draw_start_y = -spr->sprite_height / 2 + d.p.screen_heigth / 2;
 	if (spr->draw_start_y < 0)
 		spr->draw_start_y = 0;

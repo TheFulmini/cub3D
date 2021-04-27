@@ -6,13 +6,13 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 18:00:34 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 17:43:49 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:28:07 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	is_empty(char *line)
+int		is_empty(char *line)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ void	check_color_format(t_data *d, t_parse *pars)
 				|| is_space(d->line[i + 1]) || d->line[i + 1] == 0))
 			nb_of_colors++;
 		if (d->line[i++] == ',')
-			commas++; 
+			commas++;
 	}
 	if (commas != 2)
 		error_exit("Wrong number of comma arguments.", d, pars, 0);
@@ -77,7 +77,7 @@ void	set_bool_elem(t_data *d, t_elems *elems, t_parse *pars)
 
 int		all_elements_found(t_elems elems)
 {
-		if (elems.res == 0)
+	if (elems.res == 0)
 		return (0);
 	if (elems.no_text == 0)
 		return (0);
@@ -110,7 +110,7 @@ void	get_res(t_data *d, t_parse *pars, t_elems *elems)
 	i--;
 	while (d->line[i++])
 		if (!is_digit(d->line[i]) && d->line[i])
-			error_exit("Incorrect character in Resolution argument.", d, pars, 0);
+			error_exit("Incorrect character in RES argument.", d, pars, 0);
 	i = 0;
 	while (!is_digit(d->line[i]))
 		i++;

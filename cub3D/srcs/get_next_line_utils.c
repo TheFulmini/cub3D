@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:33 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 17:18:22 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:42:53 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ unsigned long	ft_strlen(char *str)
 	int	len;
 
 	len = 0;
-	while(str[len])
+	while (str[len])
 		len++;
 	return (len);
 }
 
-char	*truncate_str_free(char *str)
+char			*truncate_str_free(char *str)
 {
 	char	*new_str;
 	int		i;
@@ -43,7 +43,7 @@ char	*truncate_str_free(char *str)
 	return (new_str);
 }
 
-void	stock_supp(const char *str, char *sup, int nb_char, int mode)
+void			stock_supp(const char *str, char *sup, int nb_char, int mode)
 {
 	int	i;
 	int	j;
@@ -70,7 +70,7 @@ void	stock_supp(const char *str, char *sup, int nb_char, int mode)
 	}
 }
 
-char	*ft_strjoin_free(char *str, char *buffer, int nb_char)
+char			*ft_strjoin_free(char *str, char *buffer, int nb_char)
 {
 	char	*str_cat;
 	int		i;
@@ -92,7 +92,7 @@ char	*ft_strjoin_free(char *str, char *buffer, int nb_char)
 	return (str_cat);
 }
 
-int		newline_in_str(char *str, int nb_char, int mode)
+int				newline_in_str(char *str, int nb_char, int mode)
 {
 	int	i;
 
@@ -113,7 +113,7 @@ int		newline_in_str(char *str, int nb_char, int mode)
 			if (str[i] == '\n')
 				return (1);
 			i++;
-		}			
+		}
 	}
 	return (0);
 }

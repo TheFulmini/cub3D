@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_basic.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:02:05 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 19:13:40 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:02:03 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_space(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f')
 		return (1);
 	return (0);
 }
@@ -33,7 +34,7 @@ int	is_digit(char c)
 	return (0);
 }
 
-int	ft_strncmo(char *s1, char *s2)
+int	ft_strncmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -64,12 +65,12 @@ int	ft_atoi(const char *str)
 		i++;
 	while (str[i] >= 48 && str[i] <= 57)
 	{
-		nbr *=10;
+		nbr *= 10;
 		nbr += str[i++] - 48;
 	}
-	if (nbr >= LONG_MAX && sign = 1)
+	if (nbr >= LONG_MAX && sign == 1)
 		return (-1);
-	if (nbr >= LONG_MAX && sign = -1)
+	if (nbr >= LONG_MAX && sign == -1)
 		return (0);
 	return ((int)(nbr * sign));
 }

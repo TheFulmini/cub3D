@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:36:14 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/22 17:19:41 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:14:55 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	end_or_error(int ret, char *buffer, char **sup_str, char *line)
+int		end_or_error(int ret, char *buffer, char **sup_str, char *line)
 {
 	if (buffer)
 		free(buffer);
@@ -26,7 +26,7 @@ int	end_or_error(int ret, char *buffer, char **sup_str, char *line)
 	return (ret);
 }
 
-int	malloc_str(char **buffer, char **supp, int fd)
+int		malloc_str(char **buffer, char **supp, int fd)
 {
 	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE))))
 		return (0);
@@ -35,7 +35,6 @@ int	malloc_str(char **buffer, char **supp, int fd)
 		if (!(supp[fd] = malloc(sizeof(char) * BUFFER_SIZE)))
 			return (0);
 		supp[fd][0] = 0;
-		
 	}
 	return (1);
 }
@@ -50,13 +49,13 @@ char	*ft_strdup(const char *str)
 	len = ft_strlen((char *)str);
 	if (!(str_cpy = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	while (i < len)
-		str_cpy[i++] = str[i++];
+	while (i++ < len)
+		str_cpy[i] = str[i];
 	str_cpy[i] = '\0';
 	return (str_cpy);
 }
 
-int	make_line(int fd, char *buffer, char **line, char **supp)
+int		make_line(int fd, char *buffer, char **line, char **supp)
 {
 	int	ret;
 
@@ -70,7 +69,7 @@ int	make_line(int fd, char *buffer, char **line, char **supp)
 			return (end_or_error(-1, buffer, &supp[fd], *line));
 		ret = read(fd, buffer, BUFFER_SIZE);
 		if (ret == -1 || ret == 0)
-			return(end_or_error(ret, buffer, &supp[fd], *line));
+			return (end_or_error(ret, buffer, &supp[fd], *line));
 	}
 	*line = ft_strjoin_free(*line, buffer, ret);
 	if (!(*line))
@@ -80,7 +79,7 @@ int	make_line(int fd, char *buffer, char **line, char **supp)
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	char		*buffer;
 	static char	*supp[OPEN_MAX];
@@ -98,7 +97,7 @@ int	get_next_line(int fd, char **line)
 		stock_supp(*line, supp[fd], 0, 0);
 		*line = truncate_str_free(*line);
 		if (!(*line))
-			return (end_or_error(-1, buffer, *supp[fd], *line));
+			return (end_or_error(-1, buffer, &supp[fd], *line));
 		free(buffer);
 		return (ret);
 	}

@@ -6,26 +6,26 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:37 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/26 17:50:24 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:17:50 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	init_values(t_data *d, t_parse *pars)
+void	init_values(t_data *d, t_parse *p)
 {
-	pars->no_path = NULL;
-	pars->so_path = NULL;
-	pars->we_path = NULL;
-	pars->ea_path = NULL;
-	pars->sprite_path = NULL;
-	pars->map = NULL;
+	p->no_path = NULL;
+	p->so_path = NULL;
+	p->we_path = NULL;
+	p->ea_path = NULL;
+	p->sprite_path = NULL;
+	p->map = NULL;
 	d->line = NULL;
 	d->id = NULL;
 	d->ret = 1;
-	pars->sprite_tab = NULL;
-	pars->nb_sprites = 0;
-	pars->save = 0;
+	p->sprite_tab = NULL;
+	p->nb_sprites = 0;
+	p->save = 0;
 }
 
 void	init_elems(t_elems *elems)
@@ -72,7 +72,7 @@ void	get_fd(char *map_arg, char *ext, t_data *d)
 	i = 0;
 	while (map_arg[i])
 		i++;
-	if (ft_strcmp(map_arg + i - 4, ext))
+	if (ft_strncmp(map_arg + i - 4, ext))
 		error_exit("Map file must be \".cub\" format.", 0, 0, 0);
 	d->fd = open(map_arg, O_RDONLY);
 	if (d->fd == -1)
@@ -90,11 +90,11 @@ int		count_arg(char *line)
 
 	count = 0;
 	i = 0;
-	while (is_space(line[i]) && line[i]) //define function
+	while (is_space(line[i]) && line[i])
 		i++;
-	while (is_upper(line[i]) && line[i]) //define function 
+	while (is_upper(line[i]) && line[i])
 		i++;
-	while (is_space(line[i]) && line[i]) // define function
+	while (is_space(line[i]) && line[i])
 		i++;
 	while (line[i])
 	{

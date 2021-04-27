@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:47:52 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 12:52:04 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:14:08 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	get_path_bis(t_data *d, t_parse *p, char *path)
 		close(fd);
 		error_exit("Invalid texture or sprite path.", d, p, 0);
 	}
-	
 }
 
 void	get_path(t_data *d, t_parse *p, t_elems *e)
@@ -50,7 +49,7 @@ void	get_path(t_data *d, t_parse *p, t_elems *e)
 		i++;
 	while (is_space(d->line[i]) && d->line[i++])
 		j = i;
-	while(!is_space(d->line[i]) && d->line[i])
+	while (!is_space(d->line[i]) && d->line[i])
 		i++;
 	if (!(path = malloc(sizeof(char) * (i - j + 1))))
 		error_exit("Error. Not enough memory to allocate.", d, p, 0);
@@ -126,7 +125,7 @@ void	parse_elements(t_data *d, t_parse *p)
 	while (ret > 0 && !all_elements_found(e))
 	{
 		ret = get_next_line(d->fd, &d->line);
-		if (ret = -1)
+		if (ret == -1)
 			error_exit("Could not read file.", d, 0, 0);
 		if (!is_empty(d->line) || (is_upper(d->line[0])))
 		{
