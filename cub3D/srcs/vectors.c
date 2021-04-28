@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:56:22 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 15:20:50 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 17:41:26 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	dda_algorithm(t_raycast *r, t_mlx *d)
 			break ;
 	}
 	if (r->side == 0)
-		r->perpWallDist = (r->map_x - d->p.pos_x
-				+ (1 - r->step_y) / 2) / r->raydir_y;
+		r->perpwalldist = (r->map_x - d->p.pos_x
+				+ (1 - r->step_y) / 2) / r->raydirection_y;
 	else
-		r->perpWallDist = (r->map_y - d->p.pos_y
-				+ (1 - r->step_x) / 2) / r->raydir_x;
+		r->perpwalldist = (r->map_y - d->p.pos_y
+				+ (1 - r->step_x) / 2) / r->raydirection_x;
 }
 
 void	set_ray_direction_length(t_raycast *r, t_mlx *d)
@@ -75,13 +75,13 @@ void	set_raycast_var(t_mlx *d, t_raycast *r, int x)
 	r->deltadist_x = fabs(1 / r->raydirection_x);
 	set_ray_direction_length(r, d);
 	dda_algorithm(r, d);
-	r->line_heigth = (int)(d->p.screen_heigth / r->perpWallDist);
-	r->draw_start = -r->line_heigth / 2 + d->p.screen_heigth / 2;
+	r->line_height = (int)(d->p.screen_height / r->perpwalldist);
+	r->draw_start = -r->line_height / 2 + d->p.screen_height / 2;
 	if (r->draw_start < 0)
 		r->draw_start = 0;
-	r->draw_end = r->line_heigth / 2 + d->p.screen_heigth / 2;
-	if (r->draw_end >= d->p.screen_heigth)
-		r->draw_end = d->p.screen_heigth - 1;
+	r->draw_end = r->line_height / 2 + d->p.screen_height / 2;
+	if (r->draw_end >= d->p.screen_height)
+		r->draw_end = d->p.screen_height - 1;
 	if (r->side == 1 && r->raydirection_x > 0)
 		r->text_num = 0;
 	if (r->side == 1 && r->raydirection_x <= 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amilis <amilis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 16:19:33 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:22:19 by afulmini         ###   ########.fr       */
+/*   Created: 2021/01/20 14:54:49 by amilis            #+#    #+#             */
+/*   Updated: 2021/04/20 12:55:23 by amilis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 unsigned long	ft_strlen(char *str)
 {
-	int	len;
+	int	i;
 
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-char	*truncate_str_free(char *str)
+char	*trunc_str_wfree(char *str)
 {
 	char	*new_str;
 	int		i;
@@ -44,7 +44,7 @@ char	*truncate_str_free(char *str)
 	return (new_str);
 }
 
-void	stock_supp(const char *str, char *sup, int nb_char, int mode)
+void	stock_supp(const char *str, char *sup, int nb_car, int mode)
 {
 	int	i;
 	int	j;
@@ -62,24 +62,24 @@ void	stock_supp(const char *str, char *sup, int nb_char, int mode)
 	}
 	if (mode == 1)
 	{
-		while (str[i] != '\n' && i < nb_char)
+		while (str[i] != '\n' && i < nb_car)
 			i++;
 		i++;
-		while (i < nb_char)
+		while (i < nb_car)
 			sup[j++] = str[i++];
 		sup[j] = '\0';
 	}
 }
 
-char	*ft_strjoin_free(char *str, char *buffer, int nb_char)
+char	*ft_strjoin_wfree(char *str, char *buf, int nb_car)
 {
 	char	*str_cat;
 	int		i;
 	int		j;
 
-	if (str == NULL || buffer == NULL)
+	if (str == NULL || buf == NULL)
 		return (NULL);
-	str_cat = malloc(sizeof(char) * (ft_strlen(str) + nb_char + 1));
+	str_cat = malloc((ft_strlen(str) + nb_car + 1) * sizeof(char));
 	if (!str_cat)
 		return (NULL);
 	i = 0;
@@ -88,13 +88,13 @@ char	*ft_strjoin_free(char *str, char *buffer, int nb_char)
 		str_cat[i++] = str[j++];
 	free(str);
 	j = 0;
-	while (j < nb_char && buffer[j] != '\n')
-		str_cat[i++] = buffer[j++];
+	while (j < nb_car && buf[j] != '\n')
+		str_cat[i++] = buf[j++];
 	str_cat[i] = '\0';
 	return (str_cat);
 }
 
-int	newline_in_str(char *str, int nb_char, int mode)
+int	newline_in_str(char *str, int nb_car, int mode)
 {
 	int	i;
 
@@ -110,7 +110,7 @@ int	newline_in_str(char *str, int nb_char, int mode)
 	}
 	if (mode == 1)
 	{
-		while (i < nb_char)
+		while (i < nb_car)
 		{
 			if (str[i] == '\n')
 				return (1);

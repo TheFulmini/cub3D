@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amilis <amilis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 16:36:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:35:32 by afulmini         ###   ########.fr       */
+/*   Created: 2021/04/20 12:55:59 by amilis            #+#    #+#             */
+/*   Updated: 2021/04/20 12:56:00 by amilis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-char	**copy_map(t_data *d, t_parse *p, char **map, int nb_lines)
+char	**copy_map(t_data *d, t_pars *pars, char **map, int nb_lines)
 {
 	char	**new_map;
 	int		i;
 	int		j;
 
-	new_map = malloc(sizeof(char *) * nb_lines);
+	new_map = malloc(nb_lines * sizeof(char *));
 	if (new_map == NULL)
-		error_exit("Error. Not enough memory to allocate.", d, p, 0);
+		error_exit("Memory allocation error!", d, pars, 0);
 	i = 0;
 	while (i < nb_lines - 2)
 	{
 		new_map[i] = malloc(sizeof(char) * (ft_strlen(map[i]) + 1));
 		if (new_map[i] == NULL)
-			error_exit("Error. Not enough memory to allocate.", d, p, 0);
+			error_exit("Memory allocation error!", d, pars, new_map);
 		j = 0;
 		while (map[i][j])
 		{
@@ -41,41 +41,41 @@ char	**copy_map(t_data *d, t_parse *p, char **map, int nb_lines)
 	return (new_map);
 }
 
-void	map_parsing(t_data *d, t_parse *p)
+void	parse_map(t_data *d, t_pars *pars)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	d->ret = 1;
-	while (d->ret > 0 && !is_empty(d->line))
+	while (d->ret > 0 && !is_empty_line(d->line))
 	{
 		if (d->line && i != 0)
 			free(d->line);
 		if (i != 0)
 			d->ret = get_next_line(d->fd, &d->line);
-		p->map = copy_map(d, p, p->map, i + 2);
-		p->map[i] = malloc(sizeof(char) * (ft_strlen(d->line) + 1));
-		if (!p->map[i])
-			error_exit("Error, Not enough free mmory to allocate.", d, p, 0);
+		pars->map = copy_map(d, pars, pars->map, i + 2);
+		pars->map[i] = malloc(sizeof(char) * (ft_strlen(d->line) + 1));
+		if (!pars->map[i])
+			error_exit("Memory allocation error!", d, pars, 0);
 		j = -1;
 		while (d->line[++j])
-			p->map[i][j] = d->line[j];
-		p->map[i++][j] = 0;
+			pars->map[i][j] = d->line[j];
+		pars->map[i++][j] = 0;
 		if (d->ret == 0)
-			p->map[i] = 0;
+			pars->map[i] = 0;
 	}
 	free(d->line);
 	d->line = NULL;
 }
 
-void	add_sprite_pos(t_parse *p, int i, int j)
+void	add_sprite_pos(t_pars *p, int i, int j)
 {
-	t_sprites	*new_sprite;
+	t_sprite	*new_sprite;
 	static int	n;
 	int			k;
 
-	new_sprite = malloc(sizeof(t_sprites) * (n + 1));
+	new_sprite = malloc(sizeof(t_sprite) * (n + 1));
 	k = 0;
 	while (k < n)
 	{
@@ -88,11 +88,11 @@ void	add_sprite_pos(t_parse *p, int i, int j)
 	if (p->sprite_tab)
 		free(p->sprite_tab);
 	p->sprite_tab = new_sprite;
-	p->nb_sprites = n + 1;
+	p->nb_of_sprites = n + 1;
 	n++;
 }
 
-void	check_map_char(t_data *d, t_parse *p, int i, int j)
+void	check_valid_map_char(t_data *d, t_pars *p, int i, int j)
 {
 	if (p->map[i][j] == 'N' || p->map[i][j] == 'S' || p->map[i][j] == 'E'
 		|| p->map[i][j] == 'W')
@@ -106,44 +106,45 @@ void	check_map_char(t_data *d, t_parse *p, int i, int j)
 	if (!is_space(p->map[i][j]) && p->map[i][j] != 'E' && p->map[i][j] != 'W'
 		&& p->map[i][j] != 'N' && p->map[i][j] != 'S' && !(p->map[i][j] >= '0'
 		&& p->map[i][j] <= '2'))
-		error_exit("Wrong character in map.", d, p, 0);
-	if (p->map[i][j] == '0' || p->map[i][j] == '2' || p->map[i][j] == 'N'
-		|| p->map[i][j] == 'S' || p->map[i][j] == 'E' || p->map[i][j] == 'W')
+		error_exit("Alien character in map!", d, p, 0);
+	if (p->map[i][j] == '0' || p->map[i][j] == '2' || p->map[i][j] == 'W'
+			|| p->map[i][j] == 'N' || p->map[i][j] == 'S'
+			|| p->map[i][j] == 'E')
 	{
 		if (j == 0 || j == (int)ft_strlen(p->map[i]) - 1 || i == 0
 			|| p->map[i + 1] == 0 || j >= (int)ft_strlen(p->map[i + 1]))
-			error_exit("Invalid map.", d, p, 0);
+			error_exit("Map is invalid!", d, p, 0);
 		if (is_space(p->map[i + 1][j]) || is_space(p->map[i - 1][j])
-			|| is_space(p->map[i][j + 1]) || is_space(p->map[i][j - 1]))
-			error_exit("Invalid map.", d, p, 0);
+				|| is_space(p->map[i][j + 1]) || is_space(p->map[i][j - 1]))
+			error_exit("Map is invalid!", d, p, 0);
 	}
 }
 
-void	check_valid_map(t_data *d, t_parse *p)
+void	is_valid_map(t_data *d, t_pars *pars)
 {
-	int	i;
-	int	j;
-	int	pos;
+	int		i;
+	int		j;
+	int		count_pos;
 
 	i = 0;
-	pos = 0;
-	if (p->map == NULL)
-		error_exit("Invalid map.", d, p, 0);
-	while (p->map[i])
+	count_pos = 0;
+	if (pars->map == NULL)
+		error_exit("Invalid map!", d, pars, 0);
+	while (pars->map[i])
 	{
 		j = 0;
-		while (p->map[i])
+		while (pars->map[i][j])
 		{
-			if (p->map[i][j] == 'N' || p->map[i][j] == 'S'
-				|| p->map[i][j] == 'E' || p->map[i][j] == 'W')
-				pos++;
-			if (pos > 1)
-				error_exit("More than one player on the map.", d, p, 0);
-			check_map_char(d, p, i, j);
+			if (pars->map[i][j] == 'N' || pars->map[i][j] == 'S'
+				|| pars->map[i][j] == 'E' || pars->map[i][j] == 'W')
+				count_pos++;
+			if (count_pos > 1)
+				error_exit("More than one 'NSEW' in map!", d, pars, 0);
+			check_valid_map_char(d, pars, i, j);
 			j++;
 		}
 		i++;
 	}
-	if (pos != 1)
-		error_exit("No player available for game.", d, p, 0);
+	if (count_pos != 1)
+		error_exit("NSEW error in map!", d, pars, 0);
 }

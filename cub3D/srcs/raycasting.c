@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:44:38 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 16:30:17 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:49:36 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	set_textures_vars(t_mlx *d, t_raycast *r)
 		r->text_x = d->text_width[r->text_num] - r->text_x - 1;
 	if (r->side == 1 && r->raydirection_x < 0)
 		r->text_x = d->text_width[r->text_num] - r->text_x - 1;
-	r->step = 1.0 * d->text_height[r->text_num] / r->line_heigth;
-	r->text_pos = (r->draw_start - d->p.screen_heigth / 2
-			+ r->line_heigth / 2) * r->step;
+	r->step = 1.0 * d->text_height[r->text_num] / r->line_height;
+	r->text_pos = (r->draw_start - d->p.screen_height / 2
+			+ r->line_height / 2) * r->step;
 }
 
 void	draw_line(t_mlx *d, t_raycast *r, int x)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (y < r->draw_start)
@@ -40,7 +40,7 @@ void	draw_line(t_mlx *d, t_raycast *r, int x)
 		y++;
 	}
 	y = r->draw_end;
-	while (y < d->p.screen_heigth)
+	while (y < d->p.screen_height)
 	{
 		put_pixel(&d->img, x, y, d->p.floor_color);
 		y++;
@@ -52,15 +52,15 @@ void	draw_line(t_mlx *d, t_raycast *r, int x)
 		r->text_pos += r->step;
 		get_pixel(&d->text[r->text_num], r->text_x, r->text_y, &r->colour);
 		if (r->side == 1)
-			r->colour = (r->colour >> 1) & 8355711; //discover how this works...
+			r->colour = (r->colour >> 1) & 8355711;
 		put_pixel(&d->img, x, y, r->colour);
 		y++;
 	}
 }
 
-void	get_sprite(t_mlx d, t_raycast r, t_spritevar *s)
+void	get_sprite(t_mlx d, t_raycast r, t_sprvar *s)
 {
-	int i;
+	int	i;
 
 	set_distance(d, s);
 	i = 0;
@@ -74,7 +74,7 @@ void	get_sprite(t_mlx d, t_raycast r, t_spritevar *s)
 	}
 }
 
-void	free_sprites_tab(t_spritevar *s)
+void	free_sprites_tab(t_sprvar *s)
 {
 	if (s->sprite_order)
 		free(s->sprite_order);
@@ -84,9 +84,9 @@ void	free_sprites_tab(t_spritevar *s)
 		free(s->zbuffer);
 }
 
-int		raycasting(t_mlx *d)
+int	raycasting(t_mlx *d)
 {
-	t_spritevar	spr_v;
+	t_sprvar	spr_v;
 	int			x;
 	t_raycast	r;
 
@@ -105,7 +105,7 @@ int		raycasting(t_mlx *d)
 	d->img1 = d->img;
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img1.img, 0, 0);
 	get_player_moves(d, &r);
-	free_sprite_tab(&spr_v);
+	free_sprites_tab(&spr_v);
 	if (d->p.save == 1)
 		save_bmp(*d);
 	if (d->p.save == 1)

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   player_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amilis <amilis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 12:08:13 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:14:07 by afulmini         ###   ########.fr       */
+/*   Created: 2021/04/16 15:39:16 by amilis            #+#    #+#             */
+/*   Updated: 2021/04/20 12:56:24 by amilis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	move_forward_backward(t_mlx *d, t_raycast *r)
+void	move_updown(t_mlx *d, t_rayc *r)
 {
-	if (d->move_forward == 1)
+	if (d->move_up == 1)
 	{
 		if (d->p.map[(int)(d->p.pos_x + d->p.dir_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
 			d->p.pos_x += d->p.dir_y * r->move_speed;
-		if (d->p.map[(int)d->p.pos_y][(int)(d->p.pos_y
+		if (d->p.map[(int)d->p.pos_x][(int)(d->p.pos_y
 			+ d->p.dir_x * r->move_speed)] == '0')
 			d->p.pos_y += d->p.dir_x * r->move_speed;
 	}
-	if (d->move_backward == 1)
+	if (d->move_down == 1)
 	{
 		if (d->p.map[(int)(d->p.pos_x - d->p.dir_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
@@ -34,10 +34,10 @@ void	move_forward_backward(t_mlx *d, t_raycast *r)
 	}
 }
 
-void	move_left_rigth(t_mlx *d, t_raycast *r)
+void	move_leftright(t_mlx *d, t_rayc *r)
 {
 	if (d->move_left == 1)
-	{
+	{	
 		if (d->p.map[(int)(d->p.pos_x - d->p.plane_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
 			d->p.pos_x -= d->p.plane_y * r->move_speed;
@@ -47,7 +47,7 @@ void	move_left_rigth(t_mlx *d, t_raycast *r)
 	}
 	if (d->move_right == 1)
 	{
-		if (d->p.map[(int)(d->p.pos_x - d->p.plane_y
+		if (d->p.map[(int)(d->p.pos_x + d->p.plane_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
 			d->p.pos_x += d->p.plane_y * r->move_speed;
 		if (d->p.map[(int)d->p.pos_x][(int)(d->p.pos_y
@@ -56,7 +56,7 @@ void	move_left_rigth(t_mlx *d, t_raycast *r)
 	}
 }
 
-void	turn_left_rigth(t_mlx *d, t_raycast *r)
+void	turn_leftright(t_mlx *d, t_rayc *r)
 {
 	r->old_dir_x = d->p.dir_y;
 	r->old_plane_x = d->p.plane_y;
@@ -84,11 +84,11 @@ void	turn_left_rigth(t_mlx *d, t_raycast *r)
 	}
 }
 
-void	get_player_moves(t_mlx *d, t_raycast *r)
+void	get_player_moves(t_mlx *d, t_rayc *r)
 {
-	r->move_speed = 0.5;
-	r->turn_speed = 0.1;
-	move_forward_backward(d, r);
-	move_left_rigth(d, r);
-	turn_left_rigth(d, r);
+	r->move_speed = 0.2;
+	r->turn_speed = 0.08;
+	move_updown(d, r);
+	move_leftright(d, r);
+	turn_leftright(d, r);
 }

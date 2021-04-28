@@ -1,11 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_basic.c                                    :+:      :+:    :+:   */
+/*   pars_basic_fcts.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 19:02:05 by afulmini          #+#    #+#             */
+/*   Created: 2021/04/20 12:55:44 by amilis            #+#    #+#             */
 /*   Updated: 2021/04/28 19:29:49 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -21,14 +21,14 @@ int	is_space(char c)
 
 int	is_digit(char c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
 int	is_upper(char c)
 {
-	if (c >= 65 && c <= 90)
+	if (c >= 'A' && c <= 'Z')
 		return (1);
 	return (0);
 }
@@ -50,26 +50,26 @@ int	ft_strcmp(char *s1, char *s2)
 int	ft_atoi(const char *str)
 {
 	int					i;
-	int					sign;
-	unsigned long long	nbr;
+	int					signe;
+	unsigned long long	nb;
 
-	nbr = 0;
+	nb = 0;
+	signe = 1;
 	i = 0;
-	sign = 1;
 	while (is_space(str[i]) && str[i])
 		i++;
 	if (str[i] == '-')
-		sign = -1;
+		signe = -1;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
-	while (str[i] >= 48 && str[i] <= 57)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		nbr *= 10;
-		nbr += str[i++] - 48;
+		nb *= 10;
+		nb += str[i++] - 48;
 	}
-	if (nbr >= LONG_MAX && sign == 1)
+	if (nb >= LONG_MAX && signe == 1)
 		return (-1);
-	if (nbr >= LONG_MAX && sign == -1)
+	if (nb >= LONG_MAX && signe == -1)
 		return (0);
-	return ((int)(nbr * sign));
+	return ((int)(nb * signe));
 }

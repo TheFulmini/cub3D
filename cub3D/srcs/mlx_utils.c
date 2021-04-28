@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:34:57 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 16:31:09 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:14:36 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_pixel(t_img *img, int x, int y, int *colour)
 
 	offset = (y * img->line_length + x * (img->bits_per_pixel / 8));
 	dest = img->address + offset;
-	*(unsigned int *)dest = colour;
+	*colour = *(int *)dest;
 }
 
 void	put_pixel(t_img *img, int x, int y, int colour)
@@ -47,13 +47,13 @@ void	init_mlx_var(t_mlx *d)
 {
 	d->mlx_ptr = mlx_init();
 	d->win_ptr = mlx_new_window(d->mlx_ptr, d->p.screen_width,
-				d->p.screen_heigth, "Cub3D");
+			d->p.screen_height, "Cub3D");
 	d->img.img = mlx_new_image(d->mlx_ptr, d->p.screen_width,
-				d->p.screen_heigth);
+			d->p.screen_height);
 	d->img.address = mlx_get_data_addr(d->img.img, &d->img.bits_per_pixel,
-				&d->img.line_length, &d->img.endian);
+			&d->img.line_length, &d->img.endian);
 	d->img1.img = mlx_new_image(d->mlx_ptr, d->p.screen_width,
-				d->p.screen_heigth);
+			d->p.screen_height);
 	d->img1.address = mlx_get_data_addr(d->img1.img, &d->img1.bits_per_pixel,
-				&d->img1.line_length, &d->img1.endian);
+			&d->img1.line_length, &d->img1.endian);
 }

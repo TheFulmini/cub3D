@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:36:14 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 16:14:55 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:25:16 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int		end_or_error(int ret, char *buffer, char **sup_str, char *line)
+int	end_or_error(int ret, char *buffer, char **sup_str, char *line)
 {
 	if (buffer)
 		free(buffer);
@@ -26,13 +26,15 @@ int		end_or_error(int ret, char *buffer, char **sup_str, char *line)
 	return (ret);
 }
 
-int		malloc_str(char **buffer, char **supp, int fd)
+int	malloc_str(char **buffer, char **supp, int fd)
 {
-	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE))))
+	*buffer = malloc(sizeof(char) * (BUFFER_SIZE));
+	if (!(*buffer))
 		return (0);
 	if (supp[fd] == NULL)
 	{
-		if (!(supp[fd] = malloc(sizeof(char) * BUFFER_SIZE)))
+		supp[fd] = malloc(sizeof(char) * BUFFER_SIZE);
+		if (!(supp[fd]))
 			return (0);
 		supp[fd][0] = 0;
 	}
@@ -47,7 +49,8 @@ char	*ft_strdup(const char *str)
 
 	i = 0;
 	len = ft_strlen((char *)str);
-	if (!(str_cpy = malloc(sizeof(char) * (len + 1))))
+	str_cpy = malloc(sizeof(char) * (len + 1));
+	if (!str_cpy)
 		return (NULL);
 	while (i++ < len)
 		str_cpy[i] = str[i];
@@ -55,7 +58,7 @@ char	*ft_strdup(const char *str)
 	return (str_cpy);
 }
 
-int		make_line(int fd, char *buffer, char **line, char **supp)
+int	make_line(int fd, char *buffer, char **line, char **supp)
 {
 	int	ret;
 
@@ -79,7 +82,7 @@ int		make_line(int fd, char *buffer, char **line, char **supp)
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char		*buffer;
 	static char	*supp[OPEN_MAX];

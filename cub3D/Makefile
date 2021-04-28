@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+         #
+#    By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/27 16:05:32 by afulmini          #+#    #+#              #
-#    Updated: 2021/04/27 16:16:52 by afulmini         ###   ########.fr        #
+#    Updated: 2021/04/28 18:29:00 by afulmini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJ = $(SRCS:.c=.o)
 CCFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-MLX = -lmlx -lm -framework OpenGL -framework -AppKit
+MLX = -lmlx -lm -framework OpenGL -framework AppKit
 
 $(NAME): $(OBJ)
 	gcc $(CCFLAGS) $(OBJ) $(MLX) -o $(NAME)

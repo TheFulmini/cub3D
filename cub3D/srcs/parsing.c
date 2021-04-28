@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:59:07 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 16:20:59 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:38:09 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	error_exit(char *error_msg, t_data *d, t_parse *p, char **map)
 			free(d->id);
 		if (d->line)
 			free(d->line);
-		if (d->fd)
+		if (d)
 			close(d->fd);
 	}
 	if (p)
@@ -83,13 +83,13 @@ void	check_map(t_data *d, t_parse *p)
 	map_parsing(d, p);
 	if (d->ret < 0)
 		error_exit("Problem reading the file.", d, p, 0);
-	check_map(d, p);
+	check_valid_map(d, p);
 	p->map[(int)p->pos_x][(int)p->pos_y] = '0';
 	close(d->fd);
 	if (p->screen_width > 2880)
 		p->screen_width = 2880;
-	if (p->screen_heigth > 1490)
-		p->screen_heigth = 1490;
+	if (p->screen_height > 1490)
+		p->screen_height = 1490;
 }
 
 void	parsing(int argc, char **argv, t_parse *p)
@@ -101,7 +101,7 @@ void	parsing(int argc, char **argv, t_parse *p)
 		error_exit("Invalid number of arguments.", 0, 0, 0);
 	if (argc == 3)
 	{
-		if (ft_strncmp(argv[2], "--save"))
+		if (ft_strcmp(argv[2], "--save"))
 			error_exit("Invalid 3rd argument.", 0, 0, 0);
 		else
 			p->save = 1;

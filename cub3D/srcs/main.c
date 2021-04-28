@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 09:05:29 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 15:44:33 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:12:37 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int		clean_exit(char *exit_msg, t_parse *p, t_mlx *d, t_spritevar *s)
+int	clean_exit(char *exit_msg, t_parse *p, t_mlx *d, t_sprvar *s)
 {
 	if (s)
 	{
@@ -25,7 +25,7 @@ int		clean_exit(char *exit_msg, t_parse *p, t_mlx *d, t_spritevar *s)
 	}
 	free_parser(p);
 	printf("%s\n", exit_msg);
-	if (ft_strncmp("Error : couldn't read xpm texture.", exit_msg))
+	if (ft_strcmp("Error : couldn't read xpm texture.", exit_msg))
 		mlx_destroy(d);
 	exit(0);
 }
@@ -86,8 +86,9 @@ void	init_textures(t_mlx *d)
 			path = d->p.no_path;
 		if (i == 4)
 			path = d->p.sprite_path;
-		if (!(d->text[i].img = mlx_xpm_file_to_image(d->mlx_ptr, path,
-				&d->text_width[i], &d->text_height[i])))
+		d->text[i].img = mlx_xpm_file_to_image(d->mlx_ptr, path,
+				&d->text_width[i], &d->text_height[i]);
+		if (!d->text[i].img)
 			clean_exit("Error: could not read texture file.", &d->p, d, 0);
 		d->text[i].address = mlx_get_data_addr(d->text[i].img,
 				&d->text[i].bits_per_pixel, &d->text[i].line_length,
@@ -96,12 +97,12 @@ void	init_textures(t_mlx *d)
 	}
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_mlx	d;
 
-	parser(argc, argv, &d.p);
-	get_start_vectors(&d.p);
+	parsing(argc, argv, &d.p);
+	get_vectors_start(&d.p);
 	init_moves(&d);
 	init_mlx_var(&d);
 	init_textures(&d);

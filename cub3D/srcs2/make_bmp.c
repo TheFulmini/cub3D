@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_bmp.c                                         :+:      :+:    :+:   */
+/*   make_bmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amilis <amilis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 18:17:12 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 17:32:19 by afulmini         ###   ########.fr       */
+/*   Created: 2021/04/16 16:02:19 by amilis            #+#    #+#             */
+/*   Updated: 2021/04/20 12:55:33 by amilis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	create_header(t_mlx d, int fd)
 	int	wr;
 
 	write(fd, "BM", 2);
-	wr = 14 + 40 + 4 * d.p.screen_width * d.p.screen_height;
+	wr = 14 + 40 + 4 * d.p.screen_width * d.p.screen_heigth;
 	write(fd, &wr, 4);
 	wr = 0;
 	write(fd, &wr, 4);
@@ -26,33 +26,33 @@ void	create_header(t_mlx d, int fd)
 	wr = 40;
 	write(fd, &wr, 4);
 	write(fd, &d.p.screen_width, 4);
-	write(fd, &d.p.screen_height, 4);
+	write(fd, &d.p.screen_heigth, 4);
 	wr = 1;
 	write(fd, &wr, 2);
-	write(fd, &d.img.bits_per_pixel, 2);
+	write(fd, &d.img1.bits_per_pixel, 2);
 	wr = 0;
 	write(fd, &wr, 32);
 }
 
-void	save_bmp(t_mlx d)
+void	create_bmp(t_mlx d)
 {
 	int	fd;
 	int	x;
 	int	y;
-	int	colour;
+	int	color;
 
-	y = d.p.screen_height;
-	fd = open("./saved_image.bmp", O_CREAT | O_RDWR);
+	y = d.p.screen_heigth;
+	fd = open("./screenshot.bmp", O_CREAT | O_RDWR);
 	if (fd == -1)
-		clean_exit("Impossible to save the bmp file.", &d.p, &d, 0);
+		clean_exit("Couldn't create bmp file", &d.p, &d, 0);
 	create_header(d, fd);
 	while (y >= 0)
 	{
 		x = 0;
 		while (x < d.p.screen_width)
 		{
-			get_pixel(&d.img, x + 2, y, &colour);
-			write(fd, &colour, 4);
+			pixel_get(&d.img1, x + 2, y, &color);
+			write(fd, &color, 4);
 			x++;
 		}
 		y--;

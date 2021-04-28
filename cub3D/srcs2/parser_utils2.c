@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils2.c                                   :+:      :+:    :+:   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 18:00:34 by afulmini          #+#    #+#             */
+/*   Created: 2021/04/20 12:56:12 by amilis            #+#    #+#             */
 /*   Updated: 2021/04/28 19:18:56 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	is_empty(char *line)
+int	is_empty_line(char *line)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	is_empty(char *line)
 	return (1);
 }
 
-void	check_color_format(t_data *d, t_parse *pars)
+void	check_color_format(t_data *d, t_pars *pars)
 {
 	int	i;
 	int	commas;
@@ -44,7 +44,7 @@ void	check_color_format(t_data *d, t_parse *pars)
 	while (d->line[i])
 	{
 		if (!is_digit(d->line[i]) && !is_space(d->line[i]) && d->line[i] != ',')
-			error_exit("Incorrect character in the color format.", d, pars, 0);
+			error_exit("Alien character in color format!", d, pars, 0);
 		if (is_digit(d->line[i]) && (d->line[i + 1] == ','
 				|| is_space(d->line[i + 1]) || d->line[i + 1] == 0))
 			nb_of_colors++;
@@ -52,30 +52,32 @@ void	check_color_format(t_data *d, t_parse *pars)
 			commas++;
 	}
 	if (commas != 2)
-		error_exit("Wrong number of comma arguments.", d, pars, 0);
+		error_exit("Wrong number of commas in color format!", d, pars, 0);
 	if (nb_of_colors != 3)
-		error_exit("Wrong number of rgb arguments.", d, pars, 0);
+		error_exit("Color format must have R, G and B", d, pars, 0);
 }
 
-void	set_bool_elem(t_data *d, t_elems *elems, t_parse *pars)
+void	set_bool_elem(t_data *d, t_elems *elems, t_pars *pars)
 {
 	if (ft_strcmp(d->id, "NO") == 0 && !elems->no_text)
 		elems->no_text = 1;
 	else if (ft_strcmp(d->id, "SO") == 0 && !elems->so_text)
 		elems->so_text = 1;
-	else if (ft_strcmp(d->id, "EA") == 0 && !elems->ea_text)
-		elems->ea_text = 1;
 	else if (ft_strcmp(d->id, "WE") == 0 && !elems->we_text)
 		elems->we_text = 1;
-	else if (ft_strcmp(d->id, "F") == 0 && !elems->floor_col)
-		elems->floor_col = 1;
+	else if (ft_strcmp(d->id, "EA") == 0 && !elems->ea_text)
+		elems->ea_text = 1;
+	else if (ft_strcmp(d->id, "S") == 0 && !elems->spr_text)
+		elems->spr_text = 1;
 	else if (ft_strcmp(d->id, "C") == 0 && !elems->ceiling_col)
 		elems->ceiling_col = 1;
+	else if (ft_strcmp(d->id, "F") == 0 && !elems->floor_col)
+		elems->floor_col = 1;
 	else
-		error_exit("Invalid identifier", d, pars, 0);
+		error_exit("Invalid identifier!", d, pars, 0);
 }
 
-int	all_elements_found(t_elems elems)
+int	all_elems_found(t_elems elems)
 {
 	if (elems.res == 0)
 		return (0);
@@ -96,13 +98,13 @@ int	all_elements_found(t_elems elems)
 	return (1);
 }
 
-void	get_res(t_data *d, t_parse *pars, t_elems *elems)
+void	get_res(t_data *d, t_pars *pars, t_elems *elems)
 {
 	int	i;
 
 	i = 0;
-	if (count_arg(d->line) != 2)
-		error_exit("Invalid number of arguments for Resolution.", d, pars, 0);
+	if (count_args(d->line) != 2)
+		error_exit("Resolution : invalid number of arguments!", d, pars, 0);
 	while (is_space(d->line[i]) && d->line[i])
 		i++;
 	while (is_upper(d->line[i]) && d->line[i])
@@ -110,17 +112,17 @@ void	get_res(t_data *d, t_parse *pars, t_elems *elems)
 	i--;
 	while (d->line[++i])
 		if (!is_digit(d->line[i]) && !is_space(d->line[i]))
-			error_exit("Incorrect character in RES argument.", d, pars, 0);
+			error_exit("Alien character in argument (R)!", d, pars, 0);
 	i = 0;
 	while (!is_digit(d->line[i]))
 		i++;
 	pars->screen_width = atoi(d->line + i);
 	if (pars->screen_width <= 0)
-		error_exit("Invalid screen width!", d, pars, 0);
+		error_exit("Invalid screen resolution (x)!", d, pars, 0);
 	while (!is_space(d->line[i]))
 		i++;
-	pars->screen_height = atoi(d->line + i);
-	if (pars->screen_height <= 0)
-		error_exit("Invalid screen height!", d, pars, 0);
+	pars->screen_heigth = atoi(d->line + i);
+	if (pars->screen_heigth <= 0)
+		error_exit("Invalid screen resolution (y)!", d, pars, 0);
 	elems->res = 1;
 }

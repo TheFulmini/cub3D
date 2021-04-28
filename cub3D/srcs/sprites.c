@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 09:33:49 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 16:00:53 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:28:15 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	sort_sprites(t_spritevar *sprite, int amount)
+void	sort_sprites(t_sprvar *sprite, int amount)
 {
 	int		i;
 	int		j;
@@ -40,90 +40,90 @@ void	sort_sprites(t_spritevar *sprite, int amount)
 	}
 }
 
-int		init_sprite_tab(t_spritevar *spr, t_mlx d)
+int	init_sprite_tab(t_sprvar *s, t_mlx d)
 {
 	int	i;
 
 	i = 1;
-	spr->zbuffer = malloc(sizeof(double) * d.p.screen_width);
-	if (spr->zbuffer == NULL)
+	s->zbuffer = malloc(sizeof(double) * d.p.screen_width);
+	if (s->zbuffer == NULL)
 		i = 0;
-	spr->sprite_order = malloc(sizeof(int) * d.p.nb_sprites);
-	if (spr->sprite_order == NULL)
+	s->sprite_order = malloc(sizeof(int) * d.p.nb_sprites);
+	if (s->sprite_order == NULL)
 		i = 0;
-	spr->sprite_distance = malloc(sizeof(double) * d.p.nb_sprites);
-	if (spr->sprite_distance == NULL)
+	s->sprite_distance = malloc(sizeof(double) * d.p.nb_sprites);
+	if (s->sprite_distance == NULL)
 		i = 0;
 	return (i);
 }
 
-void	set_distance(t_mlx d, t_spritevar *spr)
+void	set_distance(t_mlx d, t_sprvar *s)
 {
 	int	i;
 
 	i = 0;
 	while (i < d.p.nb_sprites)
 	{
-		spr->sprite_order[i] = i;
-		spr->sprite_distance[i] = ((d.p.pos_y - d.p.sprite_tab[i].y)
-					* (d.p.pos_y - d.p.sprite_tab[i].y)
-					+ (d.p.pos_x - d.p.sprite_tab[i].x)
-					* (d.p.pos_x - d.p.sprite_tab[i].x));
+		s->sprite_order[i] = i;
+		s->sprite_distance[i] = ((d.p.pos_y - d.p.sprite_tab[i].y)
+				* (d.p.pos_y - d.p.sprite_tab[i].y)
+				+ (d.p.pos_x - d.p.sprite_tab[i].x)
+				* (d.p.pos_x - d.p.sprite_tab[i].x));
 		i++;
 	}
-	sort_sprites(spr, d.p.nb_sprites);
+	sort_sprites(s, d.p.nb_sprites);
 }
 
-void	set_sprite(t_mlx d, t_spritevar *spr)
+void	set_sprite(t_mlx d, t_sprvar *s)
 {
-	spr->inv_det = 1.0 / (d.p.plane_x * d.p.dir_y - d.p.dir_x * d.p.plane_y);
-	spr->transform_x = spr->inv_det * (d.p.dir_y
-			* spr->sprite_y = d.p.dir_x * spr->sprite_x);
-	spr->transform_y = spr->inv_det * (d.p.plane_y
-			* spr->sprite_y + d.p.plane_x * spr->sprite_x);
-	spr->sprite_height = abs((int)(d.p.screen_width / 2)
-			* (1 + spr->transform_x / spr->transform_y));
-	spr->sprite_height = abs((int)(d.p.screen_height / (s->transform_y)));
-	spr->draw_start_y = -spr->sprite_height / 2 + d.p.screen_heigth / 2;
-	if (spr->draw_start_y < 0)
-		spr->draw_start_y = 0;
-	spr->draw_end_y = spr->sprite_height / 2 + d.p.screen_heigth / 2;
-	if (spr->draw_end_y >= d.p.screen_heigth)
-		spr->draw_end_y = d.p.screen_heigth - 1;
-	spr->sprite_width = abs((int)(d.p.screen_heigth / (spr->transform_y)));
-	spr->draw_start_x = -spr->sprite_width / 2 + spr->sprite_screen_x;
-	if (spr->draw_start_x < 0)
-		spr->draw_start_y = 0;
-	spr->draw_end_x = spr->sprite_width / 2 + spr->sprite_screen_x;
-	if (spr->draw_end_x >= d.p.screen_width)
-		spr->draw_end_x = d.p.screen_width - 1;
+	s->inv_det = 1.0 / (d.p.plane_x * d.p.dir_y - d.p.dir_x * d.p.plane_y);
+	s->transform_x = s->inv_det * (d.p.dir_y
+			* s->sprite_y + d.p.dir_x * s->sprite_x);
+	s->transform_y = s->inv_det * (d.p.plane_y
+			* s->sprite_y + d.p.plane_x * s->sprite_x);
+	s->sprite_screen_x = (int)((d.p.screen_width / 2)
+			* (1 + s->transform_x / s->transform_y));
+	s->sprite_height = abs((int)(d.p.screen_height / (s->transform_y)));
+	s->draw_start_y = -s->sprite_height / 2 + d.p.screen_height / 2;
+	if (s->draw_start_y < 0)
+		s->draw_start_y = 0;
+	s->draw_end_y = s->sprite_height / 2 + d.p.screen_height / 2;
+	if (s->draw_end_y >= d.p.screen_height)
+		s->draw_end_y = d.p.screen_height - 1;
+	s->sprite_width = abs((int)(d.p.screen_height / (s->transform_y)));
+	s->draw_start_x = -s->sprite_width / 2 + s->sprite_screen_x;
+	if (s->draw_start_x < 0)
+		s->draw_start_y = 0;
+	s->draw_end_x = s->sprite_width / 2 + s->sprite_screen_x;
+	if (s->draw_end_x >= d.p.screen_width)
+		s->draw_end_x = d.p.screen_width - 1;
 }
 
-void	draw_sprite(t_mlx d, t_raycast r, t_spritevar *spr)
+void	draw_sprite(t_mlx d, t_raycast r, t_sprvar *s)
 {
-	int y;
+	int	y;
 
-	spr->stripe = spr->draw_start_x;
-	while (spr->stripe < spr->draw_end_x)
+	s->stripe = s->draw_start_x;
+	while (s->stripe < s->draw_end_x)
 	{
-		r.text_x = (int)(256 * (spr->stripe
-					- (-spr->sprite_width / 2 + spr->sprite_screen_x))
-					* d.text_width[4] / spr->sprite_width) / 256;
-		if (spr->transform_y > 0 && spr->stripe > 0 && spr->stripe < d.p.screen_width
-			&& spr->transform_y < spr->zbuffer[spr->stripe])
+		r.text_x = (int)(256 * (s->stripe
+					- (-s->sprite_width / 2 + s->sprite_screen_x))
+				* d.text_width[4] / s->sprite_width) / 256;
+		if (s->transform_y > 0 && s->stripe > 0 && s->stripe < d.p.screen_width
+			&& s->transform_y < s->zbuffer[s->stripe])
 		{
-			y = spr->draw_start_y;
-			while (y < spr->draw_end_y)
+			y = s->draw_start_y;
+			while (y < s->draw_end_y)
 			{
-				r.text_y = (((y * 256 - d.p.screen_heigth
-							* 128 + spr->sprite_height * 128)
-							* d.text_height[4] / spr->sprite_height / 256;
+				r.text_y = (((y * 256 - d.p.screen_height
+								* 128 + s->sprite_height * 128)
+							* d.text_height[4]) / s->sprite_height) / 256;
 				get_pixel(&d.text[4], r.text_x, r.text_y, &r.colour);
 				if ((r.colour & 0x00FFFFFF) != 0)
-					put_pixel(&d.img, spr->stripe, y, r.colour);
+					put_pixel(&d.img1, s->stripe, y, r.colour);
 				y++;
 			}
 		}
-		spr->stripe++;
+		s->stripe++;
 	}
 }
