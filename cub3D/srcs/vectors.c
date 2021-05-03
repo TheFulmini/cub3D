@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:56:22 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 17:41:26 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:20:56 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	set_raycast_var(t_mlx *d, t_raycast *r, int x)
 	if (r->draw_start < 0)
 		r->draw_start = 0;
 	r->draw_end = r->line_height / 2 + d->p.screen_height / 2;
-	if (r->draw_end >= d->p.screen_height)
+	if (r->draw_end >= d->p.screen_height || r->draw_end < 0)
 		r->draw_end = d->p.screen_height - 1;
 	if (r->side == 1 && r->raydirection_x > 0)
 		r->text_num = 0;

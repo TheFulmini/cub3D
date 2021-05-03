@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 09:33:49 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:28:15 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:23:43 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	set_sprite(t_mlx d, t_sprvar *s)
 {
 	s->inv_det = 1.0 / (d.p.plane_x * d.p.dir_y - d.p.dir_x * d.p.plane_y);
 	s->transform_x = s->inv_det * (d.p.dir_y
-			* s->sprite_y + d.p.dir_x * s->sprite_x);
-	s->transform_y = s->inv_det * (d.p.plane_y
+			* s->sprite_y - d.p.dir_x * s->sprite_x);
+	s->transform_y = s->inv_det * (-d.p.plane_y
 			* s->sprite_y + d.p.plane_x * s->sprite_x);
 	s->sprite_screen_x = (int)((d.p.screen_width / 2)
 			* (1 + s->transform_x / s->transform_y));
@@ -93,7 +93,7 @@ void	set_sprite(t_mlx d, t_sprvar *s)
 	s->sprite_width = abs((int)(d.p.screen_height / (s->transform_y)));
 	s->draw_start_x = -s->sprite_width / 2 + s->sprite_screen_x;
 	if (s->draw_start_x < 0)
-		s->draw_start_y = 0;
+		s->draw_start_x = 0;
 	s->draw_end_x = s->sprite_width / 2 + s->sprite_screen_x;
 	if (s->draw_end_x >= d.p.screen_width)
 		s->draw_end_x = d.p.screen_width - 1;

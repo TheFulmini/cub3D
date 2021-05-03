@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:36:14 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/29 16:01:06 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:25:39 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strdup(const char *str)
 	i = 0;
 	len = ft_strlen((char *)str);
 	str_cpy = malloc(sizeof(char) * (len + 1));
-	if (!str_cpy)
+	if (str_cpy == NULL)
 		return (NULL);
 	while (i < len)
 	{
