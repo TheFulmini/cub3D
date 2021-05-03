@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:37 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:16:14 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 15:23:55 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void	init_values(t_data *d, t_parse *p)
 	p->save = 0;
 }
 
-void	init_elems(t_elems *elems)
+void	init_elems(t_elems *e)
 {
-	elems->res = 0;
-	elems->no_text = 0;
-	elems->so_text = 0;
-	elems->we_text = 0;
-	elems->ea_text = 0;
-	elems->spr_text = 0;
-	elems->floor_col = 0;
-	elems->ceiling_col = 0;
+	e->res = 0;
+	e->no_text = 0;
+	e->so_text = 0;
+	e->we_text = 0;
+	e->ea_text = 0;
+	e->spr_text = 0;
+	e->floor_col = 0;
+	e->ceiling_col = 0;
 }
 
 char	*get_identifier(t_data *d)

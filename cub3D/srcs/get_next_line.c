@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:36:14 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:25:16 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:01:06 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	end_or_error(int ret, char *buffer, char **sup_str, char *line)
 
 int	malloc_str(char **buffer, char **supp, int fd)
 {
-	*buffer = malloc(sizeof(char) * (BUFFER_SIZE));
+	*buffer = malloc((BUFFER_SIZE) * sizeof(char));
 	if (!(*buffer))
 		return (0);
 	if (supp[fd] == NULL)
 	{
-		supp[fd] = malloc(sizeof(char) * BUFFER_SIZE);
+		supp[fd] = malloc((BUFFER_SIZE) * sizeof(char));
 		if (!(supp[fd]))
 			return (0);
 		supp[fd][0] = 0;
@@ -52,8 +52,11 @@ char	*ft_strdup(const char *str)
 	str_cpy = malloc(sizeof(char) * (len + 1));
 	if (!str_cpy)
 		return (NULL);
-	while (i++ < len)
+	while (i < len)
+	{
 		str_cpy[i] = str[i];
+		i++;
+	}
 	str_cpy[i] = '\0';
 	return (str_cpy);
 }
@@ -72,7 +75,7 @@ int	make_line(int fd, char *buffer, char **line, char **supp)
 			return (end_or_error(-1, buffer, &supp[fd], *line));
 		ret = read(fd, buffer, BUFFER_SIZE);
 		if (ret == -1 || ret == 0)
-			return (end_or_error(ret, buffer, &supp[fd], *line));
+			return (end_or_error(ret, buffer, &supp[fd], 0));
 	}
 	*line = ft_strjoin_free(*line, buffer, ret);
 	if (!(*line))
@@ -102,7 +105,7 @@ int	get_next_line(int fd, char **line)
 		if (!(*line))
 			return (end_or_error(-1, buffer, &supp[fd], *line));
 		free(buffer);
-		return (ret);
+		return (1);
 	}
 	ret = make_line(fd, buffer, line, supp);
 	return (ret);

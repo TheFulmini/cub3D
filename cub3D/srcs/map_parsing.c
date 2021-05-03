@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:36:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:35:32 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:40:39 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**copy_map(t_data *d, t_parse *p, char **map, int nb_lines)
 	int		i;
 	int		j;
 
-	new_map = malloc(sizeof(char *) * nb_lines);
+	new_map = malloc(nb_lines * sizeof(char *));
 	if (new_map == NULL)
 		error_exit("Error. Not enough memory to allocate.", d, p, 0);
 	i = 0;
@@ -57,7 +57,7 @@ void	map_parsing(t_data *d, t_parse *p)
 		p->map = copy_map(d, p, p->map, i + 2);
 		p->map[i] = malloc(sizeof(char) * (ft_strlen(d->line) + 1));
 		if (!p->map[i])
-			error_exit("Error, Not enough free mmory to allocate.", d, p, 0);
+			error_exit("Error, Not enough free memory to allocate.", d, p, 0);
 		j = -1;
 		while (d->line[++j])
 			p->map[i][j] = d->line[j];
@@ -106,9 +106,10 @@ void	check_map_char(t_data *d, t_parse *p, int i, int j)
 	if (!is_space(p->map[i][j]) && p->map[i][j] != 'E' && p->map[i][j] != 'W'
 		&& p->map[i][j] != 'N' && p->map[i][j] != 'S' && !(p->map[i][j] >= '0'
 		&& p->map[i][j] <= '2'))
-		error_exit("Wrong character in map.", d, p, 0);
+		error_exit("Why is there an Alien character in map!", d, p, 0);
 	if (p->map[i][j] == '0' || p->map[i][j] == '2' || p->map[i][j] == 'N'
-		|| p->map[i][j] == 'S' || p->map[i][j] == 'E' || p->map[i][j] == 'W')
+		|| p->map[i][j] == 'S' || p->map[i][j] == 'E'
+		|| p->map[i][j] == 'W')
 	{
 		if (j == 0 || j == (int)ft_strlen(p->map[i]) - 1 || i == 0
 			|| p->map[i + 1] == 0 || j >= (int)ft_strlen(p->map[i + 1]))
@@ -132,7 +133,7 @@ void	check_valid_map(t_data *d, t_parse *p)
 	while (p->map[i])
 	{
 		j = 0;
-		while (p->map[i])
+		while (p->map[i][j])
 		{
 			if (p->map[i][j] == 'N' || p->map[i][j] == 'S'
 				|| p->map[i][j] == 'E' || p->map[i][j] == 'W')

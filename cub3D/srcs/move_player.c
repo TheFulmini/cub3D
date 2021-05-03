@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 12:08:13 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:14:07 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:57:40 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	move_forward_backward(t_mlx *d, t_raycast *r)
 		if (d->p.map[(int)(d->p.pos_x + d->p.dir_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
 			d->p.pos_x += d->p.dir_y * r->move_speed;
-		if (d->p.map[(int)d->p.pos_y][(int)(d->p.pos_y
+		if (d->p.map[(int)d->p.pos_x][(int)(d->p.pos_y
 			+ d->p.dir_x * r->move_speed)] == '0')
 			d->p.pos_y += d->p.dir_x * r->move_speed;
 	}
@@ -47,7 +47,7 @@ void	move_left_rigth(t_mlx *d, t_raycast *r)
 	}
 	if (d->move_right == 1)
 	{
-		if (d->p.map[(int)(d->p.pos_x - d->p.plane_y
+		if (d->p.map[(int)(d->p.pos_x + d->p.plane_y
 				* r->move_speed)][(int)d->p.pos_y] == '0')
 			d->p.pos_x += d->p.plane_y * r->move_speed;
 		if (d->p.map[(int)d->p.pos_x][(int)(d->p.pos_y
@@ -86,8 +86,8 @@ void	turn_left_rigth(t_mlx *d, t_raycast *r)
 
 void	get_player_moves(t_mlx *d, t_raycast *r)
 {
-	r->move_speed = 0.5;
-	r->turn_speed = 0.1;
+	r->move_speed = 0.1;
+	r->turn_speed = 0.05;
 	move_forward_backward(d, r);
 	move_left_rigth(d, r);
 	turn_left_rigth(d, r);

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:21:39 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 15:23:56 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void			parsing(int argc, char **argv, t_parse *p);
 
 /* parsing_utils.c */
 void			init_values(t_data *d, t_parse *parsing);
-void			init_elems(t_elems *elems);
+void			init_elems(t_elems *e);
 char			*get_identifier(t_data *d);
 void			get_fd(char *map_arg, char *et, t_data *d);
 int				count_arg(char *line);
@@ -178,9 +178,9 @@ int				count_arg(char *line);
 /* parsing_utils2.c */
 int				is_empty(char *line);
 void			check_color_format(t_data *d, t_parse *p);
-void			set_bool_elem(t_data *d, t_elems *elems, t_parse *p);
-int				all_elements_found(t_elems elems);
-void			get_res(t_data *d, t_parse *p, t_elems *elems);
+void			set_bool_elem(t_data *d, t_elems *e, t_parse *p);
+int				all_elements_found(t_elems e);
+void			get_res(t_data *d, t_parse *p, t_elems *e);
 
 /* parsing_basic.c */
 int				is_space(char c);

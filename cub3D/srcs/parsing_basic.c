@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:02:05 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:29:49 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 15:34:28 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	is_space(char c)
 
 int	is_digit(char c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
 int	is_upper(char c)
 {
-	if (c >= 65 && c <= 90)
+	if (c >= 'A' && c <= 'Z')
 		return (1);
 	return (0);
 }

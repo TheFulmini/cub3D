@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:59:07 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:09 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:52:42 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	check_map(t_data *d, t_parse *p)
 	if (d->ret < 0)
 		error_exit("Problem reading the file.", d, p, 0);
 	check_valid_map(d, p);
+	printf("map validated\n");
 	p->map[(int)p->pos_x][(int)p->pos_y] = '0';
 	close(d->fd);
 	if (p->screen_width > 2880)
@@ -108,5 +109,6 @@ void	parsing(int argc, char **argv, t_parse *p)
 	}
 	get_fd(argv[1], ".cub", &d);
 	parse_elements(&d, p);
+	printf("elements parsed\n");
 	check_map(&d, p);
 }

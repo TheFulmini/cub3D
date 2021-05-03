@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:47:52 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 19:36:03 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:20:43 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	get_element(t_data *d, t_parse *p, t_elems *e)
 	else if (ft_strcmp(d->id, "C") == 0)
 		get_colour(d, p, e);
 	else
-		error_exit("Invalid Indentifier", d, p, 0);
+		error_exit("Invalid Identifier", d, p, 0);
 }
 
 void	parse_elements(t_data *d, t_parse *p)

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:33 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 18:22:19 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 15:59:03 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_strjoin_free(char *str, char *buffer, int nb_char)
 
 	if (str == NULL || buffer == NULL)
 		return (NULL);
-	str_cat = malloc(sizeof(char) * (ft_strlen(str) + nb_char + 1));
+	str_cat = malloc((ft_strlen(str) + nb_char + 1) * sizeof(char));
 	if (!str_cat)
 		return (NULL);
 	i = 0;

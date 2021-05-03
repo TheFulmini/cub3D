@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:47:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/27 15:39:51 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:29:13 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	key_press(int keycode, t_mlx *d)
 	if (keycode == 124)
 		d->look_right = 1;
 	if (keycode == 53)
-		clean_exit("Game left", &d->p, d, 0);
+		clean_exit("Game left by ESC", &d->p, d, 0);
 	return (0);
 }
 
@@ -50,6 +50,6 @@ int	key_release(int keycode, t_mlx *e)
 
 int	click_exit(t_mlx *d)
 {
-	clean_exit("Game left", &d->p, d, 0);
+	clean_exit("Game left by clicking", &d->p, d, 0);
 	return (0);
 }
