@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:56:22 by afulmini          #+#    #+#             */
-/*   Updated: 2021/05/03 12:20:56 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:31:39 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	set_raycast_var(t_mlx *d, t_raycast *r, int x)
 		* (2 * x / (double)(d->p.screen_width - 1) - 1);
 	r->map_x = (int)d->p.pos_x;
 	r->map_y = (int)d->p.pos_y;
-	r->deltadist_x = fabs(1 / r->raydirection_y);
+	r->deltadist_y = fabs(1 / r->raydirection_y);
 	r->deltadist_x = fabs(1 / r->raydirection_x);
 	set_ray_direction_length(r, d);
 	dda_algorithm(r, d);

@@ -6,7 +6,7 @@
 #    By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/27 16:05:32 by afulmini          #+#    #+#              #
-#    Updated: 2021/04/29 16:07:25 by afulmini         ###   ########.fr        #
+#    Updated: 2021/05/04 12:18:41 by afulmini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ RM = rm -rf
 MLX = -lmlx -lm -framework OpenGL -framework AppKit
 
 $(NAME): $(OBJ)
-	gcc $(CCFLAGS) $(OBJ) $(MLX) -o $(NAME)
+	gcc -g $(CCFLAGS) $(OBJ) $(MLX) -o $(NAME)
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 09:05:29 by afulmini          #+#    #+#             */
-/*   Updated: 2021/05/03 11:45:29 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:16:57 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_vectors_start(t_parse *p)
 	}
 	if (p->dir == 'E')
 	{
-		p->dir_x = -1;
+		p->dir_x = 1;
 		p->plane_y = 0.66;
 	}
 }
@@ -100,9 +100,8 @@ void	init_textures(t_mlx *d)
 int	main(int argc, char **argv)
 {
 	t_mlx	d;
-	printf("start parsing!!\n"); //check out
+
 	parsing(argc, argv, &d.p);
-	printf("parsing done ok!\n"); //check out 
 	get_vectors_start(&d.p);
 	init_moves(&d);
 	init_mlx_var(&d);

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/29 15:23:56 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:59:02 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <limits.h>
-# include <mlx.h>
 
 # define BUFFER_SIZE 43
 
@@ -37,15 +37,15 @@ typedef struct s_sprvar
 	double	sprite_y;
 	double	sprite_x;
 	double	inv_det;
-	double	transform_y;
 	double	transform_x;
+	double	transform_y;
 	int		sprite_screen_x;
 	int		sprite_height;
+	int		draw_start_y;
+	int		draw_end_y;
 	int		sprite_width;
 	int		draw_start_x;
 	int		draw_end_x;
-	int		draw_start_y;
-	int		draw_end_y;
 	int		stripe;
 }				t_sprvar;
 
@@ -53,14 +53,14 @@ typedef struct s_raycast
 {
 	double	raydirection_x;
 	double	raydirection_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	deltadist_x;
-	double	deltadist_y;
-	double	perpwalldist;
-	double	wallx;
 	int		map_x;
 	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	deltadist_y;
+	double	deltadist_x;
+	double	perpwalldist;
+	double	wallx;
 	int		step_x;
 	int		step_y;
 	int		side;
