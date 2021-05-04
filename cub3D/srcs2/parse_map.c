@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amilis <amilis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:55:59 by amilis            #+#    #+#             */
-/*   Updated: 2021/04/20 12:56:00 by amilis           ###   ########.fr       */
+/*   Updated: 2021/04/29 18:13:39 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	check_valid_map_char(t_data *d, t_pars *p, int i, int j)
 	}
 	if (p->map[i][j] == '2')
 		add_sprite_pos(p, i, j);
+	printf("%s\n" , *p->map);
 	if (!is_space(p->map[i][j]) && p->map[i][j] != 'E' && p->map[i][j] != 'W'
 		&& p->map[i][j] != 'N' && p->map[i][j] != 'S' && !(p->map[i][j] >= '0'
 		&& p->map[i][j] <= '2'))

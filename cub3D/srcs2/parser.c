@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:56:19 by amilis            #+#    #+#             */
-/*   Updated: 2021/05/03 14:55:16 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:02:34 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	check_map(t_data *d, t_pars *pars)
 	if (d->ret < 0)
 		error_exit("Problem encountered while reading file!", d, pars, 0);
 	parse_map(d, pars);
+	printf("%s\n", *pars->map);
+	printf("yeeet");
 	if (d->ret < 0)
 		error_exit("Problem encountered while reading file!", d, pars, 0);
 	is_valid_map(d, pars);

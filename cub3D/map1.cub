@@ -1,19 +1,20 @@
 R 1000 800
-NO ./textures/brick.xpm
+S ./textures/barrel.xpm
+
 SO ./textures/wood.xpm
 WE ./textures/metal.xpm
 EA ./textures/grass.xpm
-
+NO ./textures/brick.xpm
 
 F 202,248,220
 C 135,206,250
 
-S ./textures/barrel.xpm
+
 
 1111111
 1000001
 1001001
-100E001
+120W021
 1000001
 1002001
 1111111
