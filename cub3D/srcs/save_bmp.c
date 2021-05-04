@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 18:17:12 by afulmini          #+#    #+#             */
-/*   Updated: 2021/04/28 17:32:19 by afulmini         ###   ########.fr       */
+/*   Created: 2021/05/04 13:16:13 by afulmini          #+#    #+#             */
+/*   Updated: 2021/05/04 14:15:06 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	save_bmp(t_mlx d)
 	y = d.p.screen_height;
 	fd = open("./saved_image.bmp", O_CREAT | O_RDWR);
 	if (fd == -1)
-		clean_exit("Impossible to save the bmp file.", &d.p, &d, 0);
+			clean_exit("Impossible to save the bmp file", &d.p , &d, 0);
 	create_header(d, fd);
 	while (y >= 0)
 	{

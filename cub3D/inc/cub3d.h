@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:19:59 by afulmini          #+#    #+#             */
-/*   Updated: 2021/05/04 11:59:02 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 14:13:52 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,10 +233,6 @@ void			set_distance(t_mlx d, t_sprvar *s);
 void			set_sprite(t_mlx d, t_sprvar *s);
 void			draw_sprite(t_mlx d, t_raycast r, t_sprvar *s);
 
-/* save_bmp.c */
-void			create_header(t_mlx d, int fd);
-void			save_bmp(t_mlx d);
-
 /* main.c */
 int				clean_exit(char *exit_msg, t_parse *p, t_mlx *d, t_sprvar *s);
 void			get_vectors_start(t_parse *p);
@@ -249,5 +245,9 @@ void			move_forward_backward(t_mlx *d, t_raycast *r);
 void			move_left_rigth(t_mlx *d, t_raycast *r);
 void			turn_left_rigth(t_mlx *d, t_raycast *r);
 void			get_player_moves(t_mlx *d, t_raycast *r);
+
+/* save_bmp.c */
+void	create_header(t_mlx d, int fd);
+void	save_bmp(t_mlx d);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:44:38 by afulmini          #+#    #+#             */
-/*   Updated: 2021/05/04 12:04:43 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 14:12:42 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int	raycasting(t_mlx *d)
 	get_player_moves(d, &r);
 	free_sprites_tab(&spr_v);
 	if (d->p.save == 1)
-		save_bmp(*d);
-	if (d->p.save == 1)
+	{
+		save_bmp(*d); //define function 
 		clean_exit("Image file saved to bmp format.", &d->p, d, 0);
+	}
 	return (0);
 }

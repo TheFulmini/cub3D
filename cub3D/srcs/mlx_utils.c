@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:34:57 by afulmini          #+#    #+#             */
-/*   Updated: 2021/05/03 11:55:12 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:37:23 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	mlx_destroy(t_mlx *d)
 
 	i = 0;
 	mlx_destroy_image(d->mlx_ptr, d->img.img);
-	while (i++ < 5)
+	while (i < 5)
+	{
 		mlx_destroy_image(d->mlx_ptr, d->text[i].img);
+		i++;
+	}
 	mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 }
 
