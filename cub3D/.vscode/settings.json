@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"__locale": "c",
-		"__threading_support": "c",
-		"locale": "c",
-		"memory": "c",
-		"utility": "c"
-	}
-}
